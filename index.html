@@ -555,7 +555,7 @@ while True:
                                                                 from machine import Pin   </p> 
                 
                 
-                <p>Ini 2:initialiser trigger og echo pins-----------<h5>fd</h5> trig_pin = Pin(7, Pin.OUT)
+                <p>Ini 2:initialiser trigger og echo pins----------- trig_pin = Pin(7, Pin.OUT)
                                                                 Echo_pin = Pin(6, Pin.IN)</p>
 
                 <p>Ini 3: initialser andre pins og globale variabler</p>
@@ -1115,11 +1115,8 @@ b = int(input("hvor meget blå?"))</code></pre>
 </section>
 
 
-
-
-
 <section class="blok projekt">
-            <h2>Lidt lir "Neopixels"</h2>
+            <h2>Lir med "Neopixels"</h2>
 
             <h3>Opgaven</h3>
             <p>
@@ -1178,6 +1175,198 @@ b = int(input("hvor meget blå?"))</code></pre>
                 # Send data til LED'erne
                 leds.write()
                 sleep(0.5)
+        
+                </code></pre>
+            <p>
+                <a class="knap" href="https://docs.python.org/3/tutorial/introduction.html">
+                    Åbn Python-dokumentation
+                </a>
+            </p>
+            <p>
+                <a class="knap" href="hjaelp/index.html">
+                    ← Til hjælp           </a>
+            </p>
+          
+            
+            <h3>Kan I evt. kombinere Neopixels med andre komponenter?</h3>
+            <p>
+                Skriv kort, hvad der virkede godt i projektet.
+            </p>
+
+            
+        </section>
+
+
+<section class="blok projekt">
+            <h2>Mere "Neopixels"</h2>
+
+            <h3>Opgaven</h3>
+            <p>
+                Her skal i par implementere og sammenligene 2 forskellige koder. 
+                                
+                <h4>Dokumentation</h4>
+
+                <p>Step 10: Kommentér koden og lav en testplan.</p>
+               </p>
+                
+            
+             <p>
+                <a class="knap" href="hjaelp/index.html">
+                    ← Til hjælp           </a>
+            </p>
+
+
+
+
+
+            <!-- BILLEDE
+                 1. Læg dit billede i mappen "billeder"
+                 2. Ret filnavnet efter src=
+                 3. Ret billedteksten
+            -->
+
+           <!-- <figure>
+  
+                <img src="billeder/Neopixels.png" alt="Mit kredsløb">
+                
+
+                <figcaption>
+                    Figur 1: Neopixels kredsløb.
+                </figcaption>
+            </figure>
+        -->
+        <h3>Kode1</h3>
+
+            <pre><code> 
+import time
+from machine import Pin
+import neopixel
+
+A = Pin(7, Pin.IN)
+B = Pin(15, Pin.IN)
+C = Pin(5, Pin.IN)
+D = Pin(4, Pin.IN)
+
+ok = Pin(2, Pin.IN, Pin.PULL_UP)
+
+ring = neopixel.NeoPixel(Pin(20), 16)
+
+las = [0, 0, 0, 0]
+res = [1, 0, 1, 0]
+
+print("Hello, ESP32-S3!")
+
+while True:
+    las = [A.value(), B.value(), C.value(), D.value()]
+
+    fejl = False
+    if ok.value() == 0:
+
+        for i in range(4):
+            if res[i] != las[i]:
+                fejl = True
+                break
+
+        if fejl:
+            print("fejl")
+        else:
+            print("success")
+            for j in range (16):
+                ring[j] = (255, 0, 0)   # rød
+                ring.write()
+                time.sleep(0.15)
+                ring[j] = (0, 255, 0)   
+                ring.write()
+                time.sleep(0.05)
+                ring[j] = (0, 0, 255)   
+                ring.write()
+                time.sleep(0.15)
+                ring[j] = (0, 0, 0)   
+                ring.write()
+                time.sleep(0.15)
+        print(
+            "A:", las[0],
+            "B:", las[1],
+            "C:", las[2],
+            "D:", las[3],
+            "OK:", ok.value()
+    )
+
+        time.sleep(0.5)
+        
+                </code></pre>
+      <h3>Kode 2</h3>
+
+            <pre><code> 
+```python
+import time
+from machine import Pin
+import neopixel
+
+
+A = Pin(7, Pin.IN)
+B = Pin(15, Pin.IN)
+C = Pin(5, Pin.IN)
+D = Pin(4, Pin.IN)
+
+ok = Pin(2, Pin.IN, Pin.PULL_UP)
+
+
+ring = neopixel.NeoPixel(Pin(20), 16)
+
+
+res = [1, 0, 1, 0]
+
+# Farver og ventetider
+colors = [
+    ((255, 0, 0), 0.15),
+    ((0, 255, 0), 0.05),
+    ((0, 0, 255), 0.15),
+    ((0, 0, 0), 0.15)
+]
+
+
+def success_animation():
+    for j in range(16):
+        for color, delay in colors:
+            ring[j] = color
+            ring.write()
+            time.sleep(delay)
+
+
+print("Hello, ESP32-S3!")
+
+while True:
+
+
+    if ok.value() == 0:
+
+        las = [
+            A.value(),
+            B.value(),
+            C.value(),
+            D.value()
+        ]
+
+        print("A:", las[0],
+              "B:", las[1],
+              "C:", las[2],
+              "D:", las[3])
+
+        if las == res:
+            print("success")
+            success_animation()
+        else:
+            print("fejl")
+
+  
+        while ok.value() == 0:
+            time.sleep(0.01)
+
+  
+        time.sleep(0.05)
+```
+
         
                 </code></pre>
             <p>
