@@ -1389,6 +1389,106 @@ while True:
         </section>
 
 
+<section class="blok projekt">
+            <h2>Find mange fejl og "byg" kredsløb ud fra koden</h2>
+
+            <h3>Opgaven</h3>
+            <p>
+                Her skal I finde mange fejl i koden og rette dem, så programmet virker.
+                I skal også bygge kredsløbet ud fra koden.
+                
+                <h4>Dokumentation</h4>
+
+                <p>Step 10: Kommentér koden og lav en testplan.</p>
+               </p>
+                
+            
+           
+
+            <!-- BILLEDE
+                 1. Læg dit billede i mappen "billeder"
+                 2. Ret filnavnet efter src=
+                 3. Ret billedteksten
+            -->
+
+        <h3>kode </h3>
+
+            <pre><code> 
+        from machine import pin
+import sleep
+import neopixel
+
+antal_led = 16
+pin = 9
+
+leds = neopixel.NeoPixel(Pin(pin), antal_led)
+
+knap1 = Pin(2, Pin.IN)
+knap1 = Pin(41, Pin.IN)
+
+
+def rainbow():
+    for i in range(antal_led):
+    leds[i] = (255, 0, 0)
+        leds.write()
+        sleep(0.1)
+
+    for j in range(antal_led - 1, -1, -1):
+        leds[j] = (0, 255, 0)
+        leds.write()
+        sleep(0.2)
+
+    for i in range(antal_led):
+        leds[i] = (0, 0, 255)
+        led.write()
+        sleep(0.3)
+
+
+def ring()
+    for i in range(4):
+        for j in range(antal_led):
+
+            # Sluk alle LED'er
+            for k in range(antal_led):
+                leds[k] = (0, 0, 0)
+
+            leds[j] = (255, 0, 0)
+            leds[(j + 1) % antal_led] = (0, 255, 0)
+            leds[(j + 2) % antal_led] = (0, 0, 255)
+
+            leds.write()
+            sleep(0.1)
+
+
+while True:
+    knapstatus1 = knap1.value()
+    knapstatus2 = knap2.value()
+
+    if Knapstatus1 == 1 && knapstatus2 == 0:
+        rainbow()
+
+    elif knapstatus1 == 0 and knapstatus2 == 1
+        ring()
+        
+                </code></pre>
+            <p>
+                <a class="knap" href="https://docs.python.org/3/tutorial/introduction.html">
+                    Åbn Python-dokumentation
+                </a>
+            </p>
+            <p>
+                <a class="knap" href="hjaelp/index.html">
+                    ← Til hjælp           </a>
+            </p>
+          
+            
+            <h3>hint 1 neopixel ring og to knapper</h3>
+            <p>
+                
+            </p>
+
+            
+        </section>
 
 
 
