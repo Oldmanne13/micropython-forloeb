@@ -1415,16 +1415,16 @@ while True:
 
             <pre><code> 
         from machine import pin
-import sleep
-import neopixel
+        import sleep
+        import neopixel
 
-antal_led = 16
-pin = 9
+        antal_led = 16
+        pin = 9
 
-leds = neopixel.NeoPixel(Pin(pin), antal_led)
+        leds = neopixel.NeoPixel(Pin(pin), antal_led)
 
-knap1 = Pin(2, Pin.IN)
-knap1 = Pin(41, Pin.IN)
+        knap1 = Pin(2, Pin.IN)
+        knap1 = Pin(41, Pin.IN)
 
 
 def rainbow():
@@ -1490,6 +1490,95 @@ while True:
             
         </section>
 
+        </section>
+
+
+<section class="blok projekt">
+            <h2>Test board med neopixels</h2>
+
+            <h3>Opgaven</h3>
+            <p>
+                I skal teste boardet, med denne kode og være opmærksom på at I forløbende skal bruge den timing der er angivet koden, når I bruger disse neopixels.
+                Desuden så skal I have pull_up på jeres knap, ellers vil den ikke virke.
+                
+                <h4>Dokumentation</h4>
+
+                <p>Step 10: Upload kode og test boardet.</p>
+               </p>
+                
+
+        <h3>kode </h3>
+
+            <pre><code> 
+
+        from machine import Pin
+import neopixel
+from time import sleep
+
+
+
+button = Pin(11, Pin.IN, Pin.PULL_UP)
+# Timing til WS2812B-MINI-V6
+timing_v6 = (300, 950, 700, 600)
+antal_led = 5
+np = neopixel.NeoPixel(
+    Pin(10, Pin.OUT),
+    antal_led,
+    bpp=3,
+    timing=timing_v6
+)
+
+while True:
+    
+    buttonStatus = button.value()
+    if buttonStatus == 0:
+
+        np.fill((255, 255, 255))
+        np.write()
+        sleep(3)
+    
+    # Rød
+
+
+    # Grøn
+    np.fill((22, 20, 0))
+    np.write()
+    sleep(1)
+
+    # Blå
+    np.fill((0, 0, 20))
+    np.write()
+    sleep(1)
+
+    # Sluk
+    np.fill((0, 0, 0))
+    np.write()
+    sleep(1)
+    
+    for i in range (antal_led):
+        np[i] = (255, 0, 0)
+# Send data til LED'erne
+        np.write()
+        sleep(0.5)
+
+                </code></pre>
+            <p>
+                <a class="knap" href="https://docs.python.org/3/tutorial/introduction.html">
+                    Åbn Python-dokumentation
+                </a>
+            </p>
+            <p>
+                <a class="knap" href="hjaelp/index.html">
+                    ← Til hjælp           </a>
+            </p>
+          
+                       <p>
+                
+            </p>
+
+            
+        </section>
+        
 
 
 
