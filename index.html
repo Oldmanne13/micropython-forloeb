@@ -1579,7 +1579,111 @@ while True:
             
         </section>
         
+<section class="blok projekt">
+            <h2>Interrupts</h2>
 
+            <h3>Opgaven</h3>
+            <p>
+                Her skal I teste interrupts, som er en måde at reagere på hændelser i realtid. 
+                I kan eksempelvisbruge en knap til at udløse en interrupt, der tænder eller slukker for en LED.
+
+
+                
+
+                <h3>Upload kode og test på boardet eller i Wokwi.</h3>
+
+
+                <p>Hvad betyder det for program afviklingen at der er en 10 s. pause?<b> Ud fra hvad I observere</b></p>
+                <p>Hvad er forskellen på de to programmer?<b> Ud fra hvad I observere</b></p>
+                <p>Hvad er en interrupt? <b> Ud fra hvad I observere og måske efterfølgende spørg chat</b></p>
+                <p>Hvordan implementerer man en interrupt?<b>  spørg chat</b></p>
+                <p>Hvad går galt når I implementerer en knap uden interrupt?<b> Ud fra hvad I observere</b></p>
+                <p>Hvad går galt når I implementerer en knap uden debounce?<b> Ud fra hvad I observere</b></p>
+                <p>Hvordan håndterer man bounce under interrupts?<b>  spørg chat</b></p>
+
+
+               </p>
+<h3>Kode med interrupt</h3>    
+            <pre><code > 
+
+from machine import Pin, ADC
+import time
+import neopixel
+
+knap = Pin(11, Pin.IN, Pin.PULL_UP)
+
+
+print("Hello, ESP32-S3!")
+
+
+def interrupt_handler(pin):
+  
+
+    print("Knap trykket!")
+
+
+knap.irq(
+    trigger=Pin.IRQ_FALLING,
+    handler=interrupt_handler)
+
+while True:
+
+    knap_status = knap.value()
+    print(knap_status)
+    time.sleep(10)
+
+  </code></pre>
+
+        <h3>Kode med interrupt og debounce</h3>
+
+            <pre><code > 
+
+from machine import Pin, ADC
+import time
+import neopixel
+
+knap = Pin(11, Pin.IN, Pin.PULL_UP)
+sidste_interrupt = 0
+
+print("Hello, ESP32-S3!")
+
+
+def interrupt_handler(pin):
+    global sidste_interrupt
+    nu = time.ticks_ms()
+
+    if time.ticks_diff(nu, sidste_interrupt) > 200:
+        sidste_interrupt = nu
+        print("Knap trykket!")
+
+
+knap.irq(
+    trigger=Pin.IRQ_FALLING,
+    handler=interrupt_handler)
+
+while True:
+
+    knap_status = knap.value()
+    print(knap_status)
+    time.sleep(10)
+
+                </code></pre>
+            <p>
+                <a class="knap" href="https://docs.python.org/3/tutorial/introduction.html">
+                    Åbn Python-dokumentation
+                </a>
+            </p>
+            <p>
+                <a class="knap" href="hjaelp/index.html">
+                    ← Til hjælp           </a>
+            </p>
+          
+                       <p>
+                
+            </p>
+
+            
+        </section>
 
 
 
