@@ -1685,7 +1685,57 @@ while True:
             
         </section>
 
+<section class="blok projekt">
+            <h2>Analog</h2>
 
+            <h3>Opgaven</h3>
+            <p>
+Byg en analog input med en analog sensor og læs værdien af den. I kan bruge koden nedenfor som udgangspunkt. 
+                <h4>Dokumentation</h4>
+
+                <p>Step 10: Upload kode og test boardet.</p>
+
+
+               </p>
+<h3>analog input</h3>    
+            <pre><code > 
+
+from machine import Pin,ADC
+import time
+
+
+tempIn = ADC(Pin(1))
+knap = Pin(11, Pin.IN)
+
+
+
+
+print("Hello, ESP32-S3!")
+
+
+while True:
+    tempValue = tempIn.read_u16()
+    print(tempValue)
+
+  </code></pre>
+
+    
+            <p>
+                <a class="knap" href="https://docs.python.org/3/tutorial/introduction.html">
+                    Åbn Python-dokumentation
+                </a>
+            </p>
+            <p>
+                <a class="knap" href="hjaelp/index.html">
+                    ← Til hjælp           </a>
+            </p>
+          
+                       <p>
+                
+            </p>
+
+            
+        </section>
 
 
     </main>
